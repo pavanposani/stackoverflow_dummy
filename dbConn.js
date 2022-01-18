@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize');
 const dbConfig = require("./config.js");
-const db = {};
-const sequelize = new Sequelize('StackDB', 'SA', 'MyPass@word', {
-  host: '127.0.0.1',
+var config = require('./config')['dev'];
+
+const sequelize = new Sequelize(config.dbConfig.database,
+   config.dbConfig.user, config.dbConfig.password, {
+  host: config.dbConfig.server,
   dialect: 'mssql',
   dialectOptions: {
     encrypt: true
