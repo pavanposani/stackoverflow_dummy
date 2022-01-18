@@ -1,0 +1,74 @@
+
+
+extends layout
+block content
+  ul.list-group.list-group-flush
+    if response
+      .row
+      each record in response
+        .col-md-auto
+          a(href="/post/"+record.dataValues.id)
+            li.list-group-item.d-flex.justify-content-between.align-items-center= record.dataValues.Title
+
+          li.list-group-item.d-flex.justify-content-between.align-items-center= record.dataValues.Body.substring(0, 140)+"..."
+          li.list-group-item.d-flex(style='border: none')
+            small.text-muted Asked By : #{record.dataValues.DisplayName}
+          li.list-group-item.d-flex(style='border: none')
+            span.badge.badge-pill.badge-success score: #{record.dataValues.Score}
+            span.badge.badge-pill.badge-light.float-right Answers: #{record.dataValues.AnswerCount}
+        br
+
+  nav(aria-label='Page navigation')
+    if (pages > 0)
+    .ul.pagination.justify-content-center
+      -var url = path
+      if (currentPage == 1)
+        li.page-item.disabled
+          a.page-link(href=url+"&page="+currentPage) First
+      else
+        li.page-item
+          a.page-link(href=url+"&page=1") First
+      -var i = (Number(currentPage) > 5) ? Number(currentPage) -4: 1
+      if (i !== 1)
+        li.page-item.disabled
+          a.page-link ....
+      -for(;i<=(Number(currentPage) + 4) && (i<=pages); i++)
+          if(i == currentPage)
+            li.page-item.active
+              a.page-link #{i}
+          else
+            li.page-item
+              a.page-link(href=url+'&page='+i) #{i}
+          if (i == Number(currentPage) + 4 && i < pages)
+            li.page-item.disabled
+              a.page-link ....
+
+      if (currentPage == pages)
+        li.page-item.disabled
+          a.page-link Last
+      else
+        li.page-item.active
+          a.page-link(href=url+'&page='+pages) Last
+
+
+  footer.mt-auto.text-muted
+    .container
+      p.float-right
+        a(href='#') Back to top
+      br.
+      p.float-center Developed by Pavan Posani
+
+
+
+  script.
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("sw.js").then(swReg => { console.log("service worker registered") }).catch(err => {
+                console.error('Service Worker Error', err);
+            });
+        });
+    }
+  script(src='./bootstrap/js/jquery.min.js')
+  script(src='./bootstrap/js/vendor/popper.min.js')
+  script(src='./bootstrap/js/vendor/popper.min.js')
+  script(src='./bootstrap/js/bootstrap.min.js')

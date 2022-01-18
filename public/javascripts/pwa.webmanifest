@@ -1,0 +1,23 @@
+{
+  "name": "StackOverflow Pavan",
+  "short_name": "StackOverflow",
+  "description": "Progressive Web App designed to mimic stack Overflow",
+  "icons": [
+    {
+      "src": "/../images/stack-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/../images/stack-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "fullscreen",
+  "theme_color": "#764ABC",
+  "background_color": "#764ABC"
+}

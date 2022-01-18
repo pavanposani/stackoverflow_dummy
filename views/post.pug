@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  if response
+    .card.mt-5
+      .card-header
+        h5 #{response.dataValues.Title}
+      ul.list-group.list-group-flush
+        li.list-group-item #{response.dataValues.Body}
+        li.list-group-item.d-flex(style='border: none')
+          small.text-muted Asked By : #{response. dataValues.DisplayName}
+        li.list-group-item.d-flex(style='border: none')
+          span.badge.badge-pill.badge-success score: #{response.dataValues.Score}
+          span.badge.badge-pill.badge-light.text-right Answers: #{response.dataValues.AnswerCount}
+
+    .card
+      ul.list-group.list-group-flush
+        if answers
+          .row
+          each record in answers
+            .col-md-auto
+              li.list-group-item.d-flex.justify-content-between.align-items-center= record.dataValues.Body
+              li.list-group-item.d-flex(style='border: none')
+                small.text-muted Answered By : User:#{record.dataValues.OwnerUserId}
+              if record.dataValues.AcceptedAnswerId == record.dataValues.id
+                li.list-group-item.d-flex(style='border: none')
+                  span.badge.badge-pill.badge-success Accepted
+                  span.badge.badge-pill.badge-success score: #{record.dataValues.Score}
+              else
+                li.list-group-item.d-flex(style='border: none')
+                  span.badge.badge-pill.badge-info score: #{record.dataValues.Score}
+            br
+  else
+    next(createError(404))
