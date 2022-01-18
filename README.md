@@ -2,5 +2,5 @@
 
 Download Repo
 
-npm install\n
+npm install <br />
 npm run start
